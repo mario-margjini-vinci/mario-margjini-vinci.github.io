@@ -1,6 +1,5 @@
 import { clearPage } from '../../utils/render';
 import Navigate from '../Router/Navigate';
-import addPlayer from '../../models/game';
 
 const SetUpPage = () => {
     clearPage();
@@ -12,7 +11,7 @@ const SetUpPage = () => {
 function renderSetUpPage(){
   const main = document.querySelector('main');
   main.innerHTML=`
-  <h1 class="text-center text-primary" style="padding: 4% ">Configurez la partie</h1>
+  <h1 class="text-center" style="padding: 4% ">Configurez la partie</h1>
   <form id="setUpForm">
     <div class="container overflow-hidden text-center " style="padding-bottom: 50%">
         <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -124,56 +123,9 @@ function attachChangeEventToP4(){
     })
 }
 function attachEventToSubmit(){
-    const form = document.querySelector('#setUpForm');
-    
-    form.addEventListener('submit',(e) => {    
+    const form = document.querySelector('#setUpForm')
+    form.addEventListener('submit',(e) => {
         e.preventDefault();
-        const name1 = document.querySelector('#inputPseudo1');
-        const name2 = document.querySelector('#inputpseudo2');
-        const check3 = document.querySelector('#checkboxP3')
-        const check4 = document.querySelector('#checkboxP4')
-        const player1 = {
-            name:name1,
-            answerBIN:0,
-            answerCOA:0,
-            answerBIM:0,
-            answerDIE:0,
-            answerINF:0
-            
-        };
-        const player2 = {
-            name:name2,
-            answerBIN:0,
-            answerCOS:0,
-            answerBIM:0,
-            answerDIE:0,
-            answerINF:0
-        };
-        
-        if(check3.checked){
-            const name3 = document.querySelector('#inputPseudo3')
-            const player3 = {
-                name:name3,
-                answerBIN:0,
-                answerCOS:0,
-                answerBIM:0,
-                answerDIE:0,
-                answerINF:0};
-            addPlayer(player3)
-        }
-        if(check4.checked){
-            const name4 = document.querySelector('#inputPseudo4')
-            const player4 = {
-                name:name4,answerBIN:0,
-                answerCOS:0,
-                answerBIM:0,
-                answerDIE:0,
-                answerINF:0
-            };
-            addPlayer(player4);
-        }
-        addPlayer(player1);
-        addPlayer(player2);
         Navigate('/game');
     })
 }
