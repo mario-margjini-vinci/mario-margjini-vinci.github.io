@@ -11,4 +11,10 @@ const renderPageTitle = (title) => {
   main.appendChild(pageTitle);
 };
 
-export { clearPage, renderPageTitle };
+const hideFooter = () => {
+  const footer = document.querySelector('footer');
+  footer.style.display = 'none';
+};
+
+
+export { clearPage, renderPageTitle, hideFooter};

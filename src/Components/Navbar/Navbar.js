@@ -1,6 +1,7 @@
 
 // eslint-disable-next-line no-unused-vars
 import { Navbar as BootstrapNavbar } from 'bootstrap';
+import { getAuthenticatedUser, isAuthenticated } from '../../utils/auths';
 
 /**
  * Render the Navbar which is styled by using Bootstrap
@@ -10,27 +11,46 @@ import { Navbar as BootstrapNavbar } from 'bootstrap';
  */
 
 const Navbar = () => {
-  const navbarWrapper = document.querySelector('#navbarWrapper');
-  const navbar = `
-<nav class="navbar navbar-expand-sm navbar-light" id="UpPage">
+  renderNavbar();
+};
 
-  <div class="d-flex justify-content-between w-100 pt-3">
-    
+function renderNavbar () {
+  getAuthenticatedUser();
 
-    <div class="nav nav-underline ps-5">
-      <a class="nav-link" style="font-size: 20px" href="#" data-uri="/">Accueil</a> 
-    </div>
+  const anonymousNavbar = `
+    <nav class="navbar navbar-expand-sm navbar-light" id="UpPage">
 
-    <div class="nav nav-underline pe-5">
-      <a class="nav-link" style="font-size: 20px" href="#" data-uri="/connexion">Se connecter</a>
-      <a class="nav-link" style="font-size: 20px" href="#" data-uri="/inscription">S'inscrire</a>
-    </div>
+      <div class="d-flex justify-content-between w-100 pt-3">
+         <div class="nav nav-underline ps-5">
+          <a class="nav-link" style="font-size: 20px" href="#" data-uri="/">Accueil</a> 
+        </div>
 
-  </div>
-
-</nav>
+        <div class="nav nav-underline pe-5">
+          <a class="nav-link" style="font-size: 20px" href="#" data-uri="/connexion">Se connecter</a>
+          <a class="nav-link" style="font-size: 20px" href="#" data-uri="/inscription">S'inscrire</a>
+        </div>
+      </div>
+    </nav>
   `;
-  navbarWrapper.innerHTML = navbar;
+
+  const authenticatedNavbar = `
+    <nav class="navbar navbar-expand-sm navbar-light" id="UpPage">
+  
+        <div class="d-flex justify-content-between w-100 pt-3">
+           <div class="nav nav-underline ps-5">
+            <a class="nav-link" style="font-size: 20px" href="#" data-uri="/">Accueil</a> 
+          </div>
+  
+          <div class="nav nav-underline pe-5">
+            <a class="nav-link" style="font-size: 20px" href="#" data-uri="/stats">Profil</a>
+            <a class="nav-link" style="font-size: 20px" href="#" data-uri="/logOut">Se déconnecter</a>
+          </div>
+        </div>
+    </nav>
+  `;
+
+  const navbarWrapper = document.querySelector('#navbarWrapper');
+  navbarWrapper.innerHTML = isAuthenticated() ? authenticatedNavbar : anonymousNavbar;
 };
 
 export default Navbar;
